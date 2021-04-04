@@ -27,3 +27,7 @@ func (s *ConverterTestSuite) TestDokuToMd_Header() {
 	assert.Equal(s.T(), "##### Header 5", s.converter.DokuToMd("== Header 5 =="))
 	assert.Equal(s.T(), "###### Header 6", s.converter.DokuToMd("= Header 6 ="))
 }
+
+func (s *ConverterTestSuite) TestDokuToMd_Italic() {
+	assert.Equal(s.T(), "*italic*", s.converter.DokuToMd("//italic//"))
+}
