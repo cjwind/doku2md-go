@@ -32,3 +32,7 @@ func (s *ConverterTestSuite) TestDokuToMd_Italic() {
 	assert.Equal(s.T(), "*italic*", s.converter.DokuToMd("//italic//"))
 	assert.Equal(s.T(), "http://www.google.com https://www.google.com", s.converter.DokuToMd("http://www.google.com https://www.google.com"))
 }
+
+func (s *ConverterTestSuite) TestDokuToMd_Monospaced() {
+	assert.Equal(s.T(), "`monospaced`", s.converter.DokuToMd(`''%%monospaced%%''`))
+}

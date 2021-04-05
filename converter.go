@@ -10,6 +10,7 @@ type Converter struct {
 func (c Converter) DokuToMd(input string) (output string) {
 	line := c.convertHeader(input)
 	line = c.convertItalic(line)
+	line = c.convertMonospaced(line)
 	return line
 }
 
@@ -47,5 +48,14 @@ func (c Converter) convertItalic(line string) (output string) {
 		output = reg.ReplaceAllString(output, "${1}//")
 	}
 
+	return output
+}
+
+func (c Converter) convertMonospaced(line string) (output string) {
+	output = line
+	reg := regexp.MustCompile(`''%%(.*)%%''`)
+	if reg.MatchString(output) {
+		output = reg.ReplaceAllString(output, "`$1`")
+	}
 	return output
 }
