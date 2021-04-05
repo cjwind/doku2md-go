@@ -12,6 +12,7 @@ func (c Converter) DokuToMd(input string) (output string) {
 	line = c.convertItalic(line)
 	line = c.convertMonospaced(line)
 	line = c.convertCodeblockTag(line)
+	line = c.convertLink(line)
 	return line
 }
 
@@ -81,6 +82,16 @@ func (c Converter) convertCodeblockTag(line string) (output string) {
 	reg = regexp.MustCompile(`</sxh>`)
 	if reg.MatchString(output) {
 		output = reg.ReplaceAllString(output, "```")
+	}
+	return output
+}
+
+func (c Converter) convertLink(line string) (output string) {
+	output = line
+
+	reg := regexp.MustCompile(`\[\[(.*)\|(.*)\]\]`)
+	if reg.MatchString(output) {
+		output = reg.ReplaceAllString(output, "[$2]($1)")
 	}
 	return output
 }

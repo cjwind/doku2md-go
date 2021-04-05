@@ -42,5 +42,8 @@ func (s *ConverterTestSuite) TestDokuToMd_Codeblock() {
 	assert.Equal(s.T(), "```", s.converter.DokuToMd("</code>"))
 	assert.Equal(s.T(), "```c", s.converter.DokuToMd("<sxh c>"))
 	assert.Equal(s.T(), "```", s.converter.DokuToMd("</sxh>"))
+}
 
+func (s *ConverterTestSuite) TestDokuToMd_Link() {
+	assert.Equal(s.T(), "[Google](www.google.com)", s.converter.DokuToMd("[[www.google.com|Google]]"))
 }
