@@ -36,3 +36,11 @@ func (s *ConverterTestSuite) TestDokuToMd_Italic() {
 func (s *ConverterTestSuite) TestDokuToMd_Monospaced() {
 	assert.Equal(s.T(), "`monospaced`", s.converter.DokuToMd(`''%%monospaced%%''`))
 }
+
+func (s *ConverterTestSuite) TestDokuToMd_Codeblock() {
+	assert.Equal(s.T(), "```c", s.converter.DokuToMd("<code c>"))
+	assert.Equal(s.T(), "```", s.converter.DokuToMd("</code>"))
+	assert.Equal(s.T(), "```c", s.converter.DokuToMd("<sxh c>"))
+	assert.Equal(s.T(), "```", s.converter.DokuToMd("</sxh>"))
+
+}
