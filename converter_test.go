@@ -51,3 +51,7 @@ func (s *ConverterTestSuite) TestDokuToMd_Link() {
 func (s *ConverterTestSuite) TestDokuToMd_UnorderedListItem() {
 	assert.Equal(s.T(), "* ABC", s.converter.DokuToMd("  * ABC"))
 }
+
+func (s *ConverterTestSuite) TestDokuToMd_OrderedListItem() {
+	assert.Equal(s.T(), "1. ABC", s.converter.DokuToMd("  - ABC"))
+}
