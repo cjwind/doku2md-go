@@ -13,6 +13,7 @@ func (c Converter) DokuToMd(input string) (output string) {
 	line = c.convertMonospaced(line)
 	line = c.convertCodeblockTag(line)
 	line = c.convertLink(line)
+	line = c.convertUnorderedListItem(line)
 	return line
 }
 
@@ -92,6 +93,15 @@ func (c Converter) convertLink(line string) (output string) {
 	reg := regexp.MustCompile(`\[\[(.*)\|(.*)\]\]`)
 	if reg.MatchString(output) {
 		output = reg.ReplaceAllString(output, "[$2]($1)")
+	}
+	return output
+}
+
+func (c Converter) convertUnorderedListItem(line string) (output string) {
+	output = line
+	reg := regexp.MustCompile(`^  ( *)\* (.*)`)
+	if reg.MatchString(output) {
+		output = reg.ReplaceAllString(output, "* $2")
 	}
 	return output
 }

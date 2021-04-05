@@ -47,3 +47,7 @@ func (s *ConverterTestSuite) TestDokuToMd_Codeblock() {
 func (s *ConverterTestSuite) TestDokuToMd_Link() {
 	assert.Equal(s.T(), "[Google](www.google.com)", s.converter.DokuToMd("[[www.google.com|Google]]"))
 }
+
+func (s *ConverterTestSuite) TestDokuToMd_UnorderedListItem() {
+	assert.Equal(s.T(), "* ABC", s.converter.DokuToMd("  * ABC"))
+}
