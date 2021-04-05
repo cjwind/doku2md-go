@@ -23,3 +23,7 @@ Support following syntax
 * Monospaced
 * Unordered list
 * Ordered list
+
+## License
+
+MIT
