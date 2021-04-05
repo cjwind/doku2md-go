@@ -2,20 +2,29 @@ package doku2md
 
 import (
 	"regexp"
+	"strings"
 )
 
 type Converter struct {
 }
 
 func (c Converter) DokuToMd(input string) (output string) {
-	line := c.convertHeader(input)
-	line = c.convertItalic(line)
-	line = c.convertMonospaced(line)
-	line = c.convertCodeblockTag(line)
-	line = c.convertLink(line)
-	line = c.convertUnorderedListItem(line)
-	line = c.convertOrderedListItem(line)
-	return line
+	lines := strings.Split(input, "\n")
+	for i, line := range lines {
+		line = c.convertHeader(line)
+		line = c.convertItalic(line)
+		line = c.convertMonospaced(line)
+		line = c.convertCodeblockTag(line)
+		line = c.convertLink(line)
+		line = c.convertUnorderedListItem(line)
+		line = c.convertOrderedListItem(line)
+
+		output += line
+		if i < len(lines)-1 {
+			output += "\n"
+		}
+	}
+	return output
 }
 
 func (c Converter) convertHeader(line string) (output string) {

@@ -55,3 +55,29 @@ func (s *ConverterTestSuite) TestDokuToMd_UnorderedListItem() {
 func (s *ConverterTestSuite) TestDokuToMd_OrderedListItem() {
 	assert.Equal(s.T(), "1. ABC", s.converter.DokuToMd("  - ABC"))
 }
+
+func (s *ConverterTestSuite) TestDokuToMd_Document() {
+	input := `
+====== Header 1 ======
+
+Hello world
+
+===== Header 2 =====
+
+//Testing//
+
+**Yaaaaaaa**
+`
+	expected := `
+# Header 1
+
+Hello world
+
+## Header 2
+
+*Testing*
+
+**Yaaaaaaa**
+`
+	assert.Equal(s.T(), expected, s.converter.DokuToMd(input))
+}
